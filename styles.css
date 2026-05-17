@@ -18,6 +18,7 @@
 body {
   margin: 0;
   min-height: 100vh;
+  min-height: 100dvh;
   background:
     radial-gradient(circle at 25% 20%, rgba(52, 211, 153, 0.14), transparent 28rem),
     linear-gradient(135deg, #0b0e14 0%, #101522 52%, #141018 100%);
@@ -36,6 +37,7 @@ button {
 .app {
   width: min(100%, 860px);
   min-height: 100vh;
+  min-height: 100dvh;
   margin: 0 auto;
   padding: 24px;
   display: grid;
@@ -167,33 +169,106 @@ button {
 
 @media (max-width: 680px) {
   .app {
-    padding: 12px;
+    min-height: 100dvh;
+    padding: 10px;
     align-content: start;
+    grid-template-rows: minmax(0, 1fr) auto;
+    gap: 10px;
   }
 
   .game-area {
-    grid-template-columns: 1fr;
-    justify-items: center;
+    min-height: 0;
+    grid-template-columns: minmax(0, 1fr) minmax(92px, 112px);
+    align-items: start;
+    justify-content: center;
+    gap: 8px;
   }
 
   .panel {
-    width: min(100%, 360px);
-    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    gap: 8px;
+    padding: 8px;
   }
 
-  .next,
-  .secondary,
-  .keys {
-    grid-column: 1 / -1;
+  .board-wrap {
+    width: min(100%, calc((100dvh - 88px) / 2));
+    max-height: calc(100dvh - 88px);
+    justify-self: end;
+  }
+
+  .stat,
+  .next {
+    gap: 4px;
+    padding: 8px;
+  }
+
+  .stat span,
+  .next span {
+    font-size: 0.72rem;
+  }
+
+  .stat strong {
+    font-size: 1.12rem;
+  }
+
+  #next {
+    width: 76px;
+    height: 76px;
   }
 
   .keys {
     display: none;
   }
 
+  .secondary {
+    min-height: 40px;
+    font-size: 0.9rem;
+  }
+
   .touch-controls {
     display: grid;
     position: sticky;
-    bottom: 12px;
+    bottom: max(10px, env(safe-area-inset-bottom));
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .touch-controls button {
+    min-height: 54px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .app {
+    padding: 8px;
+  }
+
+  .game-area {
+    grid-template-columns: minmax(0, 1fr) 86px;
+    gap: 6px;
+  }
+
+  .panel {
+    gap: 6px;
+    padding: 6px;
+  }
+
+  .stat,
+  .next {
+    padding: 6px;
+  }
+
+  #next {
+    width: 68px;
+    height: 68px;
+  }
+
+  .touch-controls {
+    gap: 6px;
+  }
+
+  .touch-controls button {
+    min-height: 50px;
+    font-size: 0.94rem;
   }
 }
