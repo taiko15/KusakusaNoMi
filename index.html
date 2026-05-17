@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tetris</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="app" aria-label="Tetris game">
+      <section class="game-area">
+        <div class="board-wrap">
+          <canvas id="board" width="300" height="600" aria-label="Tetris board"></canvas>
+          <div id="overlay" class="overlay">
+            <h1>Tetris</h1>
+            <button id="startBtn" class="primary">Start</button>
+          </div>
+        </div>
+
+        <aside class="panel" aria-label="Game status">
+          <div class="stat">
+            <span>Score</span>
+            <strong id="score">0</strong>
+          </div>
+          <div class="stat">
+            <span>Lines</span>
+            <strong id="lines">0</strong>
+          </div>
+          <div class="stat">
+            <span>Level</span>
+            <strong id="level">1</strong>
+          </div>
+          <div class="next">
+            <span>Next</span>
+            <canvas id="next" width="120" height="120" aria-label="Next piece"></canvas>
+          </div>
+          <button id="pauseBtn" class="secondary">Pause</button>
+          <div class="keys">
+            <span>← → Move</span>
+            <span>↑ Rotate</span>
+            <span>↓ Soft drop</span>
+            <span>Space Hard drop</span>
+          </div>
+        </aside>
+      </section>
+
+      <nav class="touch-controls" aria-label="Touch controls">
+        <button data-action="left" aria-label="Move left">←</button>
+        <button data-action="rotate" aria-label="Rotate">↻</button>
+        <button data-action="right" aria-label="Move right">→</button>
+        <button data-action="down" aria-label="Soft drop">↓</button>
+        <button data-action="drop" aria-label="Hard drop">Drop</button>
+      </nav>
+    </main>
+
+    <script src="game.js"></script>
+  </body>
+</html>
