@@ -1,0 +1,14 @@
+{
+  "name": "social-studies-discord-bot",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "send": "node src/send-daily-question.js",
+    "dry-run": "DRY_RUN=true node src/send-daily-question.js",
+    "test": "node test/daily-question.test.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

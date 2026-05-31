@@ -1,0 +1,23 @@
+name: Send daily social studies question
+
+on:
+  schedule:
+    # GitHub Actions cron is UTC. 22:00 UTC is 07:00 JST on the next day.
+    - cron: "0 22 * * *"
+  workflow_dispatch:
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Run tests
+        run: npm test
+      - name: Send today's question
+        run: npm run send
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
