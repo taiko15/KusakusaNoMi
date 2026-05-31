@@ -69,6 +69,7 @@ export const questions = [
     category: "公民",
     question: "日本の選挙で、投票できる年齢は満何歳以上でしょう？",
     answer: "満18歳以上",
+    acceptedAnswers: ["18歳", "18歳以上", "満18歳"],
     explanation: "2016年から、選挙権年齢は満20歳以上から満18歳以上へ引き下げられました。"
   },
   {
@@ -111,6 +112,7 @@ export const questions = [
     category: "地理",
     question: "赤道が大陸本土を通る大陸を1つ答えてください。",
     answer: "アフリカ大陸、南アメリカ大陸のいずれか",
+    acceptedAnswers: ["アフリカ大陸", "アフリカ", "南アメリカ大陸", "南アメリカ", "南米大陸", "南米"],
     explanation: "赤道はアフリカ大陸と南アメリカ大陸の本土を通ります。"
   },
   {

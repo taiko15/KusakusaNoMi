@@ -6,6 +6,8 @@
   "scripts": {
     "send": "node src/send-daily-question.js",
     "dry-run": "DRY_RUN=true node src/send-daily-question.js",
+    "deploy-worker": "npx wrangler deploy",
+    "register-command": "node scripts/register-discord-command.js",
     "test": "node test/daily-question.test.js"
   },
   "engines": {

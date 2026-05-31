@@ -29,12 +29,6 @@ export function formatDailyQuestion({ dateText, question }) {
     "",
     question.question,
     "",
-    "答えは下にあります。",
-    "↓",
-    "↓",
-    "↓",
-    `答え：${question.answer}`,
-    "",
-    `解説：${question.explanation}`
+    "回答するには `/answer` コマンドを使ってください。"
   ].join("\n");
 }
