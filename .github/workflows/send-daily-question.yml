@@ -2,8 +2,8 @@ name: Send daily social studies question
 
 on:
   schedule:
-    # GitHub Actions cron is UTC. 22:00 UTC is 07:00 JST on the next day.
-    - cron: "0 22 * * *"
+    # GitHub Actions cron is UTC. 08:00 UTC is 17:00 JST.
+    - cron: "0 8 * * *"
   workflow_dispatch:
 
 jobs:

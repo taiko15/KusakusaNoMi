@@ -1,6 +1,6 @@
 # 毎日の社会科 Discord Bot
 
-毎朝7時（日本時間）に、指定したDiscordチャンネルへ社会科の問題を1問配信します。
+毎日夕方5時（日本時間）に、指定したDiscordチャンネルへ社会科の問題を1問配信します。
 問題、答え、短い解説を1通のメッセージにまとめています。
 
 ## 必要なもの
@@ -19,7 +19,7 @@
 5. Repository secretとして `DISCORD_WEBHOOK_URL` を追加します。
 6. `Actions` タブで `Send daily social studies question` を選び、`Run workflow` で初回配信を確認します。
 
-以後、`.github/workflows/send-daily-question.yml` が毎日22:00 UTC（翌日の07:00 JST）に実行されます。
+以後、`.github/workflows/send-daily-question.yml` が毎日08:00 UTC（17:00 JST）に実行されます。
 
 ## 手元で確認する
 
