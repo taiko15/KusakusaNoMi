@@ -11,4 +11,11 @@
 - Build command: 空欄
 - Build output directory: `/`
 
-`index.html`、`styles.css`、`app.js`、`picts/`をそのまま配信します。
+`index.html`、`styles.css`、`app.js`、`data/`、`picts/`をそのまま配信します。
+
+## ファイル構成
+
+- `app.js`: 画面表示、出題、回答、保存、音声処理
+- `data/questions.js`: 学年別の漢字問題一覧
+- `data/crabs.js`: カニ画像のファイル名一覧
+- `picts/`: カニ画像ファイル
