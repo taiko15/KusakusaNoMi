@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>漢字よみとり10問チャレンジ</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="app">
+    <section class="panel" id="start-screen">
+      <div class="brand">
+        <div class="mark" aria-hidden="true">読</div>
+        <div>
+          <h1>漢字よみとり10問チャレンジ</h1>
+          <p>学年をえらんで、4つの読みから正しいものをタップします。</p>
+        </div>
+      </div>
+
+      <div class="grade-grid" id="grade-grid" aria-label="学年を選ぶ"></div>
+
+      <div class="notice">
+        <strong>ルール</strong>
+        <span>各学年200問の中から、毎回10問をランダムに出題します。まちがえた問題は正解するまで同じ問題に挑戦します。</span>
+      </div>
+
+      <div class="tools">
+        <section class="tool-box" aria-labelledby="add-title">
+          <h2 id="add-title">問題を追加</h2>
+          <form class="add-form" id="add-form">
+            <label>
+              <span>学年</span>
+              <select id="custom-grade" required>
+                <option value="1">1年生</option>
+                <option value="2">2年生</option>
+                <option value="3">3年生</option>
+                <option value="4">4年生</option>
+                <option value="5">5年生</option>
+                <option value="6">6年生</option>
+              </select>
+            </label>
+            <label>
+              <span>漢字</span>
+              <input id="custom-kanji" type="text" autocomplete="off" required placeholder="例：学校">
+            </label>
+            <label>
+              <span>読み</span>
+              <input id="custom-reading" type="text" autocomplete="off" required placeholder="例：がっこう">
+            </label>
+            <button class="primary-button" type="submit">登録</button>
+          </form>
+          <p class="tool-message" id="add-message" role="status"></p>
+        </section>
+
+        <section class="tool-box" aria-labelledby="history-title">
+          <div class="tool-head">
+            <h2 id="history-title">間違い履歴</h2>
+            <button class="ghost-button small" id="clear-history-button" type="button">消す</button>
+          </div>
+          <div class="history-list" id="history-list"></div>
+        </section>
+      </div>
+
+      <section class="collection-box" aria-labelledby="collection-title">
+        <div class="tool-head">
+          <div>
+            <h2 id="collection-title">カニコレクション</h2>
+            <p id="collection-count">0 / 0</p>
+          </div>
+          <button class="ghost-button small" id="clear-collection-button" type="button">リセット</button>
+        </div>
+        <div class="collection-grid" id="collection-grid"></div>
+      </section>
+    </section>
+
+    <section class="panel game hidden" id="game-screen" aria-live="polite">
+      <header class="game-head">
+        <button class="ghost-button" id="back-button" type="button">学年選択</button>
+        <div class="status">
+          <span id="grade-label">1年</span>
+          <span id="progress-label">1 / 10</span>
+        </div>
+      </header>
+
+      <div class="progress" aria-hidden="true">
+        <div id="progress-bar"></div>
+      </div>
+
+      <div class="question-card">
+        <div class="prompt">この漢字の読みは？</div>
+        <div class="kanji" id="kanji-text">山</div>
+      </div>
+
+      <div class="choices" id="choices"></div>
+      <div class="feedback" id="feedback" role="status"></div>
+    </section>
+
+    <section class="panel result hidden" id="result-screen">
+      <div class="celebration" id="celebration" aria-hidden="true"></div>
+      <div class="result-badge">満点</div>
+      <h2 id="result-title">10問クリア！</h2>
+      <p id="result-copy">すごい！ぜんぶ正解できました。</p>
+      <div class="reward-card" id="reward-card"></div>
+      <div class="result-actions">
+        <button class="primary-button" id="retry-button" type="button">同じ学年でもう一度</button>
+        <button class="secondary-button" id="change-grade-button" type="button">学年を変える</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>
