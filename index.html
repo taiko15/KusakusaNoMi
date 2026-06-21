@@ -17,17 +17,10 @@
         </div>
       </div>
 
-      <section class="access-card" aria-labelledby="access-title">
-        <div class="access-copy">
-          <span class="access-label">スマホ・タブレットでも遊べます</span>
-          <h2 id="access-title">QRコードですぐアクセス</h2>
-          <p>カメラでQRコードを読み取ると、この漢字クイズを開けます。</p>
-          <a href="https://kusakusanomi.pages.dev/">kusakusanomi.pages.dev</a>
-        </div>
-        <a class="qr-link" href="https://kusakusanomi.pages.dev/" aria-label="漢字よみとり10問チャレンジを開く">
-          <img src="./qr-kusakusanomi.svg" width="160" height="160" alt="漢字クイズのURLを読み取るQRコード">
-        </a>
-      </section>
+      <a class="access-card" href="https://kusakusanomi.pages.dev/" aria-label="QRコードから漢字クイズを開く">
+        <img src="./qr-kusakusanomi.svg" width="68" height="68" alt="">
+        <span>スマホで開く<small>QRコード</small></span>
+      </a>
 
       <div class="grade-grid" id="grade-grid" aria-label="学年を選ぶ"></div>
 
@@ -78,6 +71,7 @@
           <div>
             <h2 id="collection-title">カニコレクション</h2>
             <p id="collection-count">0 / 0</p>
+            <p class="collection-hint">カニをタップすると大きく見られます</p>
           </div>
           <button class="ghost-button small" id="clear-collection-button" type="button">リセット</button>
         </div>
@@ -119,6 +113,12 @@
       </div>
     </section>
   </main>
+
+  <dialog class="crab-viewer" id="crab-viewer" aria-labelledby="crab-viewer-title">
+    <button class="viewer-close" id="viewer-close" type="button" aria-label="拡大画像を閉じる">×</button>
+    <img id="crab-viewer-image" alt="">
+    <h2 id="crab-viewer-title"></h2>
+  </dialog>
 
   <script type="module" src="./app.js"></script>
 </body>

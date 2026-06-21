@@ -5,6 +5,7 @@ const TOTAL_QUESTIONS = 10;
 const CUSTOM_BANK_KEY = "kanji-custom-bank-v1";
 const WRONG_HISTORY_KEY = "kanji-wrong-history-v1";
 const CRAB_COLLECTION_KEY = "kanji-crab-collection-v1";
+const CELEBRATION_STYLE_KEY = "kanji-celebration-style-v1";
 const state = {
   grade: 1,
   queue: [],
@@ -41,6 +42,9 @@ const historyList = document.querySelector("#history-list");
 const collectionGrid = document.querySelector("#collection-grid");
 const collectionCount = document.querySelector("#collection-count");
 const rewardCard = document.querySelector("#reward-card");
+const crabViewer = document.querySelector("#crab-viewer");
+const crabViewerImage = document.querySelector("#crab-viewer-image");
+const crabViewerTitle = document.querySelector("#crab-viewer-title");
 const AudioContextClass = window.AudioContext || window.webkitAudioContext;
 let audioContext;
 let bgmTimer;
@@ -283,7 +287,50 @@ function answer(reading, button) {
 function celebrate(reward) {
   playFanfare();
   renderReward(reward);
+  celebration.className = "celebration";
   celebration.replaceChildren();
+  const style = nextCelebrationStyle();
+
+  if (style === 1) {
+    renderCrabDance(reward.fileName);
+    return;
+  }
+
+  if (style === 2) {
+    renderCrabMikoshi(reward.fileName);
+    return;
+  }
+
+  renderConfetti();
+}
+
+function nextCelebrationStyle() {
+  try {
+    const saved = localStorage.getItem(CELEBRATION_STYLE_KEY);
+    const current = saved === null ? 1 : Number(saved) % 3;
+    localStorage.setItem(CELEBRATION_STYLE_KEY, String((current + 1) % 3));
+    return current;
+  } catch {
+    return Math.floor(Math.random() * 3);
+  }
+}
+
+function celebrationTitle(text) {
+  const title = document.createElement("div");
+  title.className = "celebration-title";
+  title.textContent = text;
+  return title;
+}
+
+function celebrationCrab(fileName, className) {
+  const image = document.createElement("img");
+  image.className = className;
+  image.src = crabPath(fileName);
+  image.alt = "";
+  return image;
+}
+
+function renderConfetti() {
   const colors = ["#f43f5e", "#f59e0b", "#22c55e", "#3b82f6", "#a855f7", "#14b8a6"];
   const fragment = document.createDocumentFragment();
 
@@ -298,6 +345,51 @@ function celebrate(reward) {
   }
 
   celebration.append(fragment);
+}
+
+function renderCrabDance(fileName) {
+  const stage = document.createElement("div");
+  stage.className = "dance-stage";
+  const line = document.createElement("div");
+  line.className = "dance-line";
+
+  for (let index = 0; index < 3; index += 1) {
+    const crab = celebrationCrab(fileName, "dance-crab");
+    crab.style.setProperty("--delay", `${index * -180}ms`);
+    line.append(crab);
+  }
+
+  stage.append(celebrationTitle("カニダンスでお祝い！"), line);
+  celebration.append(stage);
+}
+
+function renderCrabMikoshi(fileName) {
+  const collection = loadCrabCollection();
+  const files = collection.length > 0 ? collection : [fileName];
+  const stage = document.createElement("div");
+  stage.className = "mikoshi-stage";
+  const wrap = document.createElement("div");
+  wrap.className = "mikoshi-wrap";
+  const mikoshi = document.createElement("div");
+  mikoshi.className = "mikoshi";
+  const roof = document.createElement("div");
+  roof.className = "mikoshi-roof";
+  const box = document.createElement("div");
+  box.className = "mikoshi-box";
+  box.textContent = "祝";
+  const pole = document.createElement("div");
+  pole.className = "mikoshi-pole";
+  const carriers = document.createElement("div");
+  carriers.className = "mikoshi-carriers";
+
+  for (let index = 0; index < 4; index += 1) {
+    carriers.append(celebrationCrab(files[index % files.length], "mikoshi-crab"));
+  }
+
+  mikoshi.append(roof, box);
+  wrap.append(mikoshi, pole, carriers);
+  stage.append(celebrationTitle("わっしょい！カニ神輿！"), wrap);
+  celebration.append(stage);
 }
 
 function renderReward(reward) {
@@ -409,8 +501,11 @@ function renderCollection() {
 
   collectionGrid.replaceChildren(
     ...collection.map((fileName) => {
-      const card = document.createElement("div");
+      const card = document.createElement("button");
       card.className = "crab-card";
+      card.type = "button";
+      card.setAttribute("aria-label", `${crabName(fileName)}を大きく表示`);
+      card.addEventListener("click", () => openCrabViewer(fileName));
 
       const image = document.createElement("img");
       image.src = crabPath(fileName);
@@ -424,6 +519,14 @@ function renderCollection() {
       return card;
     })
   );
+}
+
+function openCrabViewer(fileName) {
+  const name = crabName(fileName);
+  crabViewerImage.src = crabPath(fileName);
+  crabViewerImage.alt = name;
+  crabViewerTitle.textContent = name;
+  crabViewer.showModal();
 }
 
 function renderGrades() {
@@ -450,6 +553,13 @@ document.querySelector("#clear-history-button").addEventListener("click", () => 
 document.querySelector("#clear-collection-button").addEventListener("click", () => {
   saveCrabCollection([]);
   renderCollection();
+});
+document.querySelector("#viewer-close").addEventListener("click", () => crabViewer.close());
+crabViewer.addEventListener("click", (event) => {
+  if (event.target === crabViewer) crabViewer.close();
+});
+crabViewer.addEventListener("close", () => {
+  crabViewerImage.removeAttribute("src");
 });
 addForm.addEventListener("submit", addCustomQuestion);
 
