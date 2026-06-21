@@ -19,3 +19,4 @@
 - `data/questions.js`: 学年別の漢字問題一覧
 - `data/crabs.js`: カニ画像のファイル名一覧
 - `picts/`: カニ画像ファイル
+- `qr-kusakusanomi.svg`: 公開URLのQRコード
